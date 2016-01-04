@@ -36,6 +36,8 @@ public protocol MessageModelProtocol: ChatItemProtocol {
     var isIncoming: Bool { get }
     var date: NSDate { get }
     var status: MessageStatus { get set }
+    var senderName: String { get set }
+    var senderAvatar: UIImage { get set }
 }
 
 public protocol DecoratedMessageModelProtocol: MessageModelProtocol {
@@ -71,6 +73,24 @@ public extension DecoratedMessageModelProtocol {
             self.messageModel.status = newValue
         }
     }
+    
+    var senderName: String {
+        get {
+            return self.messageModel.senderName
+        }
+        set {
+            self.messageModel.senderName = newValue
+        }
+    }
+    
+    var senderAvatar: UIImage {
+        get {
+            return self.messageModel.senderAvatar
+        }
+        set {
+            self.messageModel.senderAvatar = newValue
+        }
+    }
 }
 
 public class MessageModel: MessageModelProtocol {
@@ -80,13 +100,17 @@ public class MessageModel: MessageModelProtocol {
     public var isIncoming: Bool
     public var date: NSDate
     public var status: MessageStatus
-
-    public init(uid: String, senderId: String, type: String, isIncoming: Bool, date: NSDate, status: MessageStatus) {
+    public var senderName: String
+    public var senderAvatar: UIImage
+    
+    public init(uid: String, senderId: String, type: String, isIncoming: Bool, date: NSDate, status: MessageStatus, senderName: String, senderAvatar: UIImage) {
         self.uid = uid
         self.senderId = senderId
         self.type = type
         self.isIncoming = isIncoming
         self.date = date
         self.status = status
+        self.senderName = senderName
+        self.senderAvatar = senderAvatar
     }
 }

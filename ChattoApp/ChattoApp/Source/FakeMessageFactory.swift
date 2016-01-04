@@ -42,7 +42,8 @@ func createTextMessageModel(uid: String, text: String, isIncoming: Bool) -> Text
 func createMessageModel(uid: String, isIncoming: Bool, type: String) -> MessageModel {
     let senderId = isIncoming ? "1" : "2"
     let messageStatus = isIncoming || arc4random_uniform(100) % 3 == 0 ? MessageStatus.Success : .Failed
-    let messageModel = MessageModel(uid: uid, senderId: senderId, type: type, isIncoming: isIncoming, date: NSDate(), status: messageStatus)
+    
+    let messageModel = MessageModel(uid: uid, senderId: senderId, type: type, isIncoming: isIncoming, date: NSDate(), status: messageStatus, senderName:"Jesus Christ", senderAvatar:UIImage(named: "pic-test-1")!)
     return messageModel
 }
 
@@ -138,6 +139,7 @@ class TutorialMessageFactory {
     static func createMessages() -> [MessageModelProtocol] {
         var result = [MessageModelProtocol]()
         for (index, message) in self.messages.enumerate() {
+            
             let type = message.0
             let content = message.1
             let isIncoming: Bool = arc4random_uniform(100) % 2 == 0
